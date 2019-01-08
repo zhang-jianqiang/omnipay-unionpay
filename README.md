@@ -68,6 +68,16 @@ $gateway->setPrivateKey($config['privateKey']); // path or content
 $gateway->setReturnUrl($config['returnUrl']);
 $gateway->setNotifyUrl($config['notifyUrl']);
 
+//以上是作者推荐的方法，我没有测试成功，以下是我自己测试的方法
+$gateway    = Omnipay::create('UnionPay_Express');
+$gateway->setMerId($config['merId']);
+$gateway->setCertDir($config['certDir']); // .pfx file 目录
+$gateway->setCertPath($config['certPath']); // .pfx file 文件
+$gateway->setCertPassword($config['certPassword']);
+$gateway->setReturnUrl($config['returnUrl']);
+$gateway->setNotifyUrl($config['notifyUrl']);
+$gateway->setEnvironment('production');//默认的是开发环境，如果使用正式地址要设置成production
+
 $order = [
     'orderId'   => date('YmdHis'), //Your order ID
     'txnTime'   => date('YmdHis'), //Should be format 'YmdHis'
